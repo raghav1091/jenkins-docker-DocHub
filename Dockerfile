@@ -1,4 +1,7 @@
-FROM openjdk:8
-EXPOSE 8080
-ADD target/docker-jenkins-integration-sample.jar docker-jenkins-integration-sample.jar
-ENTRYPOINT ["java","-jar","/docker-jenkins-integration-sample.jar"]
+FROM ubuntu:latest
+RUN apt-get update
+RUN apt-get install --no-install-recommends --no-install-suggests -y curl
+ENV SITE_URL http://nihera.net/
+WORKDIR /data
+VOLUME /data
+CMD sh -c "curl -L $SITE_URL > /data/results"
